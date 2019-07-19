@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="no-js">
+
+<head>
+	<script src="scripts/normal-script.js" integrity="sha384-wrongHash"
+		crossorigin="anonymous"></script>
+	<script src="scripts/require.js"></script>
+	<script>
+		require.config({
+			onNodeCreated : function callback( node, config, module ) {
+				node.setAttribute('integrity', 'sha384-wrongHash')
+				node.setAttribute('crossorigin', 'anonymous')
+			}
+		});
+		require(["scripts/require-script"],
+			function () {
+				//This function will be called when all the dependencies
+				//listed above are loaded. Note that this function could
+				//be called before the page is loaded.
+				//This callback is optional.
+				console.log('require js loaded')
+			}
+		);
+
+		var scriptNode = document.createElement( 'script' );
+		scriptNode.setAttribute( 'src', './scripts/non-require-script.js' );
+		scriptNode.setAttribute('integrity', 'sha384-wrongHash');
+		scriptNode.setAttribute('crossorigin', 'anonymous');
+		document.head.appendChild( scriptNode );
+
+	</script>
+</head>
+
+<body>
+</body>
+
+</html>
